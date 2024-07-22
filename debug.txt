@@ -1,0 +1,12 @@
+Not using distributed mode
+Hostname: cl5n034
+IP: 10.13.0.56
+Namespace(checkpoint_interval=10, conf_seed=42, config_name='Tiny', config_path='config', debug=False, device='cuda', distributed=False, do_sweep=False, enable_autograd_detect_anomaly=False, enable_profile=False, kill_other_python_processes=False, local_rank=None, local_world_size=None, logging_interval=10, master_address='127.0.0.1', method_name='SwinTrack', mixin_config=None, num_workers=16, output_dir='./output/SwinTrack-Tiny-2024.07.19-15.02.19-516028', persistent_data_workers=False, pin_memory=False, profile_logging_path=None, rank=None, resume=None, root_path='', run_id='SwinTrack-Tiny-2024.07.19-15.02.19-516028', seed=42, sweep_config=None, wandb_distributed_aware=False, wandb_run_offline=False, watch_model_freq=1000, watch_model_gradients=False, watch_model_parameters=False, weight_path=None, world_size=None)
+(4,)
+(4,)
+(4,)
+(4,)
+(4,)
+(4,)
+(4,)
+(4,)
