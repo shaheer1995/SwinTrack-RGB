@@ -19,4 +19,4 @@ filters:
 datasets:
   GOT10k:
     splits:
-      - "val"
+      - "test"

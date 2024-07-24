@@ -13,7 +13,7 @@ def _construct_GOT10k_public_data(constructor: SingleObjectTrackingDatasetConstr
         images = os.listdir(sequence_path)
         images = [image for image in images if image.endswith('.jpg')]
         images.sort()
-
+        # print(sequence_name, sequence_path)
         bounding_boxes = load_numpy_array_from_txt(os.path.join(sequence_path, 'groundtruth_rect.txt'), delimiter='\t')
         bounding_boxes = try_get_int_array(bounding_boxes)
 
@@ -31,13 +31,13 @@ def _construct_GOT10k_non_public_data(constructor: SingleObjectTrackingDatasetCo
         images = [image for image in images if image.endswith('.jpg')]
         images.sort()
 
-        print("Sequence Name : ", sequence_name)
+        # print("Sequence Name : ", sequence_name)
 
         bounding_box = load_numpy_array_from_txt(os.path.join(sequence_path, 'groundtruth_rect.txt'), delimiter='\t')
         bounding_box = try_get_int_array(bounding_box)
 
-        print("BBOX Shape : ", bounding_box.shape)
-        print("BBOX nDIM  : ", bounding_box.ndim)
+        # print("BBOX Shape : ", bounding_box.shape)
+        # print("BBOX nDIM  : ", bounding_box.ndim)
         assert bounding_box.ndim == 1 and bounding_box.shape[0] == 4
 
         with constructor.new_sequence() as sequence_constructor:
@@ -64,11 +64,12 @@ def construct_GOT10k(constructor: SingleObjectTrackingDatasetConstructor, seed):
         raise RuntimeError(f'Unsupported dataset split {data_split}')
 
     # constructor.set_category_id_name_map({k: v for k, v in enumerate(_category_names)})
-
+    print("Loading False HSI")
     sequence_list = []
     for sequence_name in os.listdir(os.path.join(root_path, folder)):
         sequence_name = sequence_name.strip()
         current_sequence_path = os.path.join(root_path, folder, sequence_name) + '/HSI-FalseColor'
+        # print("path : ", current_sequence_path)
         sequence_list.append((sequence_name, current_sequence_path))
 
     constructor.set_total_number_of_sequences(len(sequence_list))

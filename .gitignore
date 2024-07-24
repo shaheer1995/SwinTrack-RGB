@@ -537,3 +537,9 @@ logging
 .vscode
 wandb
 path.yaml
+
+wandb/
+.*txt
+results/
+pretrained/
+output/

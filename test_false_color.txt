@@ -1,0 +1,154 @@
+Not using distributed mode
+Hostname: cl5n037
+IP: 10.13.0.59
+Namespace(checkpoint_interval=10, conf_seed=42, config_name='Tiny', config_path='config', debug=False, device='cuda', distributed=False, do_sweep=False, enable_autograd_detect_anomaly=False, enable_profile=False, kill_other_python_processes=False, local_rank=None, local_world_size=None, logging_interval=10, master_address='127.0.0.1', method_name='SwinTrack', mixin_config=None, num_workers=16, output_dir='./output/SwinTrack-Tiny-2024.07.25-03.44.25-185529', persistent_data_workers=False, pin_memory=False, profile_logging_path=None, rank=None, resume=None, root_path='', run_id='SwinTrack-Tiny-2024.07.25-03.44.25-185529', seed=42, sweep_config=None, wandb_distributed_aware=False, wandb_run_offline=False, watch_model_freq=1000, watch_model_gradients=False, watch_model_parameters=False, weight_path='./pretrained/SwinTrack-Tiny.pth', world_size=None)
+Start training
+Initialization modules flop table
+| module                                                 | #parameters or shape   | #flops    |
+|:-------------------------------------------------------|:-----------------------|:----------|
+| model                                                  | 22.712M                | 0.937G    |
+|  backbone                                              |  12.152M               |  0.937G   |
+|   backbone.stages                                      |   12.151M              |   0.937G  |
+|    backbone.stages.0                                   |    0.23M               |    0.194G |
+|    backbone.stages.1                                   |    0.966M              |    0.196G |
+|    backbone.stages.2                                   |    10.955M             |    0.547G |
+|   backbone.norm2                                       |   0.768K               |   94.08K  |
+|    backbone.norm2.weight                               |    (384,)              |           |
+|    backbone.norm2.bias                                 |    (384,)              |           |
+|  encoder                                               |  7.72M                 |           |
+|   encoder.layers                                       |   7.098M               |           |
+|    encoder.layers.0                                    |    1.774M              |           |
+|    encoder.layers.1                                    |    1.774M              |           |
+|    encoder.layers.2                                    |    1.774M              |           |
+|    encoder.layers.3                                    |    1.774M              |           |
+|   encoder.z_untied_pos_enc                             |   0.302M               |           |
+|    encoder.z_untied_pos_enc.pos                        |    5.376K              |           |
+|    encoder.z_untied_pos_enc.norm                       |    0.768K              |           |
+|    encoder.z_untied_pos_enc.pos_q_linear               |    0.148M              |           |
+|    encoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   encoder.x_untied_pos_enc                             |   0.307M               |           |
+|    encoder.x_untied_pos_enc.pos                        |    10.752K             |           |
+|    encoder.x_untied_pos_enc.norm                       |    0.768K              |           |
+|    encoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |           |
+|    encoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   encoder.rpe_bias_table                               |   13.584K              |           |
+|    encoder.rpe_bias_table.relative_position_bias_table |    (8, 1698)           |           |
+|  decoder                                               |  2.245M                |           |
+|   decoder.layers.0                                     |   1.775M               |           |
+|    decoder.layers.0.norm1_q                            |    0.768K              |           |
+|    decoder.layers.0.norm1_kv                           |    0.768K              |           |
+|    decoder.layers.0.attn                               |    0.591M              |           |
+|    decoder.layers.0.norm2                              |    0.768K              |           |
+|    decoder.layers.0.mlp                                |    1.182M              |           |
+|   decoder.z_untied_pos_enc                             |   0.154M               |           |
+|    decoder.z_untied_pos_enc.pos                        |    5.376K              |           |
+|    decoder.z_untied_pos_enc.norm                       |    0.768K              |           |
+|    decoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   decoder.x_untied_pos_enc                             |   0.307M               |           |
+|    decoder.x_untied_pos_enc.pos                        |    10.752K             |           |
+|    decoder.x_untied_pos_enc.norm                       |    0.768K              |           |
+|    decoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |           |
+|    decoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   decoder.rpe_bias_table                               |   9.032K               |           |
+|    decoder.rpe_bias_table.relative_position_bias_table |    (8, 1129)           |           |
+|  out_norm                                              |  0.768K                |           |
+|   out_norm.weight                                      |   (384,)               |           |
+|   out_norm.bias                                        |   (384,)               |           |
+|  head                                                  |  0.593M                |           |
+|   head.cls_mlp.layers                                  |   0.296M               |           |
+|    head.cls_mlp.layers.0                               |    0.148M              |           |
+|    head.cls_mlp.layers.1                               |    0.148M              |           |
+|    head.cls_mlp.layers.2                               |    0.385K              |           |
+|   head.reg_mlp.layers                                  |   0.297M               |           |
+|    head.reg_mlp.layers.0                               |    0.148M              |           |
+|    head.reg_mlp.layers.1                               |    0.148M              |           |
+|    head.reg_mlp.layers.2                               |    1.54K               |           |
+Tracking modules flop table
+| module                                                 | #parameters or shape   | #flops     |
+|:-------------------------------------------------------|:-----------------------|:-----------|
+| model                                                  | 22.712M                | 6.366G     |
+|  backbone                                              |  12.152M               |  3.749G    |
+|   backbone.stages                                      |   12.151M              |   3.748G   |
+|    backbone.stages.0                                   |    0.23M               |    0.775G  |
+|    backbone.stages.1                                   |    0.966M              |    0.785G  |
+|    backbone.stages.2                                   |    10.955M             |    2.188G  |
+|   backbone.norm2                                       |   0.768K               |   0.376M   |
+|    backbone.norm2.weight                               |    (384,)              |            |
+|    backbone.norm2.bias                                 |    (384,)              |            |
+|  encoder                                               |  7.72M                 |  2.018G    |
+|   encoder.layers                                       |   7.098M               |   1.922G   |
+|    encoder.layers.0                                    |    1.774M              |    0.481G  |
+|    encoder.layers.1                                    |    1.774M              |    0.481G  |
+|    encoder.layers.2                                    |    1.774M              |    0.481G  |
+|    encoder.layers.3                                    |    1.774M              |    0.481G  |
+|   encoder.z_untied_pos_enc                             |   0.302M               |   14.545M  |
+|    encoder.z_untied_pos_enc.pos                        |    5.376K              |    0       |
+|    encoder.z_untied_pos_enc.norm                       |    0.768K              |    94.08K  |
+|    encoder.z_untied_pos_enc.pos_q_linear               |    0.148M              |    7.225M  |
+|    encoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |    7.225M  |
+|   encoder.x_untied_pos_enc                             |   0.307M               |   58.179M  |
+|    encoder.x_untied_pos_enc.pos                        |    10.752K             |    0       |
+|    encoder.x_untied_pos_enc.norm                       |    0.768K              |    0.376M  |
+|    encoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |    28.901M |
+|    encoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |    28.901M |
+|   encoder.rpe_bias_table                               |   13.584K              |   0        |
+|    encoder.rpe_bias_table.relative_position_bias_table |    (8, 1698)           |            |
+|  decoder                                               |  2.245M                |  0.483G    |
+|   decoder.layers.0                                     |   1.775M               |   0.399G   |
+|    decoder.layers.0.norm1_q                            |    0.768K              |    0.376M  |
+|    decoder.layers.0.norm1_kv                           |    0.768K              |    0.47M   |
+|    decoder.layers.0.attn                               |    0.591M              |    0.167G  |
+|    decoder.layers.0.norm2                              |    0.768K              |    0.376M  |
+|    decoder.layers.0.mlp                                |    1.182M              |    0.231G  |
+|   decoder.z_untied_pos_enc                             |   0.154M               |   7.319M   |
+|    decoder.z_untied_pos_enc.pos                        |    5.376K              |    0       |
+|    decoder.z_untied_pos_enc.norm                       |    0.768K              |    94.08K  |
+|    decoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |    7.225M  |
+|   decoder.x_untied_pos_enc                             |   0.307M               |   58.179M  |
+|    decoder.x_untied_pos_enc.pos                        |    10.752K             |    0       |
+|    decoder.x_untied_pos_enc.norm                       |    0.768K              |    0.376M  |
+|    decoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |    28.901M |
+|    decoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |    28.901M |
+|   decoder.rpe_bias_table                               |   9.032K               |   0        |
+|    decoder.rpe_bias_table.relative_position_bias_table |    (8, 1129)           |            |
+|  out_norm                                              |  0.768K                |  0.376M    |
+|   out_norm.weight                                      |   (384,)               |            |
+|   out_norm.bias                                        |   (384,)               |            |
+|  head                                                  |  0.593M                |  0.116G    |
+|   head.cls_mlp.layers                                  |   0.296M               |   57.878M  |
+|    head.cls_mlp.layers.0                               |    0.148M              |    28.901M |
+|    head.cls_mlp.layers.1                               |    0.148M              |    28.901M |
+|    head.cls_mlp.layers.2                               |    0.385K              |    75.264K |
+|   head.reg_mlp.layers                                  |   0.297M               |   58.104M  |
+|    head.reg_mlp.layers.0                               |    0.148M              |    28.901M |
+|    head.reg_mlp.layers.1                               |    0.148M              |    28.901M |
+|    head.reg_mlp.layers.2                               |    1.54K               |    0.301M  |
+Estimated model FPS: init 142.583 track 92.411
+Train SwinTrack-Tiny:   0%|          | 0/20 [00:00<?, ?it/s]
+Epoch: [0] [  0/585] eta: 2:18:16 Thu Jul 25 03:46:05 2024 lr: 0.000000 loss: 1.0762 (1.0762) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7242 (0.7242) loss_iou: 0.3520 (0.3520) loss_varifocal_unscaled: 0.4828 (0.4828) loss_iou_unscaled: 0.2347 (0.2347) time: 14.1820 data: 11.8099 max mem: 36326
+Epoch: [0] [ 10/585] eta: 0:22:05 Thu Jul 25 03:46:16 2024 lr: 0.000001 loss: 1.0762 (1.0660) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7193 (0.7125) loss_iou: 0.3522 (0.3535) loss_varifocal_unscaled: 0.4795 (0.4750) loss_iou_unscaled: 0.2348 (0.2357) time: 2.3061 data: 1.1165 max mem: 36588
+Epoch: [0] [ 20/585] eta: 0:16:21 Thu Jul 25 03:46:27 2024 lr: 0.000002 loss: 1.0526 (1.0595) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7055 (0.7080) loss_iou: 0.3506 (0.3514) loss_varifocal_unscaled: 0.4703 (0.4720) loss_iou_unscaled: 0.2337 (0.2343) time: 1.1144 data: 0.0480 max mem: 36588
+Epoch: [0] [ 30/585] eta: 0:14:10 Thu Jul 25 03:46:38 2024 lr: 0.000003 loss: 1.0451 (1.0581) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7029 (0.7082) loss_iou: 0.3450 (0.3499) loss_varifocal_unscaled: 0.4686 (0.4721) loss_iou_unscaled: 0.2300 (0.2333) time: 1.1083 data: 0.0464 max mem: 36588
+Epoch: [0] [ 40/585] eta: 0:12:59 Thu Jul 25 03:46:49 2024 lr: 0.000004 loss: 1.0634 (1.0584) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7123 (0.7093) loss_iou: 0.3474 (0.3492) loss_varifocal_unscaled: 0.4749 (0.4729) loss_iou_unscaled: 0.2316 (0.2328) time: 1.1071 data: 0.0454 max mem: 36588
+Epoch: [0] [ 50/585] eta: 0:12:11 Thu Jul 25 03:47:00 2024 lr: 0.000004 loss: 1.0567 (1.0561) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7104 (0.7074) loss_iou: 0.3474 (0.3486) loss_varifocal_unscaled: 0.4736 (0.4716) loss_iou_unscaled: 0.2316 (0.2324) time: 1.1087 data: 0.0473 max mem: 36588
+Epoch: [0] [ 60/585] eta: 0:11:35 Thu Jul 25 03:47:12 2024 lr: 0.000005 loss: 1.0405 (1.0539) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7049 (0.7072) loss_iou: 0.3379 (0.3466) loss_varifocal_unscaled: 0.4700 (0.4715) loss_iou_unscaled: 0.2253 (0.2311) time: 1.1093 data: 0.0477 max mem: 36588
+Epoch: [0] [ 70/585] eta: 0:11:06 Thu Jul 25 03:47:23 2024 lr: 0.000006 loss: 1.0453 (1.0533) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7073 (0.7070) loss_iou: 0.3403 (0.3463) loss_varifocal_unscaled: 0.4716 (0.4713) loss_iou_unscaled: 0.2269 (0.2309) time: 1.1091 data: 0.0473 max mem: 36588
+Epoch: [0] [ 80/585] eta: 0:10:42 Thu Jul 25 03:47:34 2024 lr: 0.000007 loss: 1.0473 (1.0512) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7067 (0.7061) loss_iou: 0.3426 (0.3450) loss_varifocal_unscaled: 0.4712 (0.4708) loss_iou_unscaled: 0.2284 (0.2300) time: 1.1095 data: 0.0478 max mem: 36588
+Epoch: [0] [ 90/585] eta: 0:10:20 Thu Jul 25 03:47:45 2024 lr: 0.000008 loss: 1.0333 (1.0499) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7023 (0.7054) loss_iou: 0.3425 (0.3446) loss_varifocal_unscaled: 0.4682 (0.4702) loss_iou_unscaled: 0.2283 (0.2297) time: 1.1096 data: 0.0481 max mem: 36588
+Epoch: [0] [100/585] eta: 0:10:01 Thu Jul 25 03:47:56 2024 lr: 0.000009 loss: 1.0419 (1.0492) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7004 (0.7050) loss_iou: 0.3411 (0.3442) loss_varifocal_unscaled: 0.4669 (0.4700) loss_iou_unscaled: 0.2274 (0.2295) time: 1.1097 data: 0.0481 max mem: 36588
+Epoch: [0] [110/585] eta: 0:09:43 Thu Jul 25 03:48:07 2024 lr: 0.000009 loss: 1.0325 (1.0466) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6952 (0.7038) loss_iou: 0.3365 (0.3428) loss_varifocal_unscaled: 0.4634 (0.4692) loss_iou_unscaled: 0.2244 (0.2285) time: 1.1094 data: 0.0481 max mem: 36588
+Epoch: [0] [120/585] eta: 0:09:26 Thu Jul 25 03:48:18 2024 lr: 0.000010 loss: 1.0226 (1.0447) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6892 (0.7032) loss_iou: 0.3265 (0.3415) loss_varifocal_unscaled: 0.4595 (0.4688) loss_iou_unscaled: 0.2177 (0.2276) time: 1.1085 data: 0.0476 max mem: 36588
+Epoch: [0] [130/585] eta: 0:09:10 Thu Jul 25 03:48:29 2024 lr: 0.000010 loss: 1.0284 (1.0428) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6909 (0.7023) loss_iou: 0.3258 (0.3405) loss_varifocal_unscaled: 0.4606 (0.4682) loss_iou_unscaled: 0.2172 (0.2270) time: 1.1081 data: 0.0472 max mem: 36588
+Epoch: [0] [140/585] eta: 0:08:55 Thu Jul 25 03:48:40 2024 lr: 0.000010 loss: 1.0196 (1.0404) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6895 (0.7013) loss_iou: 0.3229 (0.3391) loss_varifocal_unscaled: 0.4596 (0.4675) loss_iou_unscaled: 0.2152 (0.2261) time: 1.1083 data: 0.0476 max mem: 36588
+Epoch: [0] [150/585] eta: 0:08:40 Thu Jul 25 03:48:51 2024 lr: 0.000010 loss: 1.0113 (1.0390) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6873 (0.7009) loss_iou: 0.3185 (0.3380) loss_varifocal_unscaled: 0.4582 (0.4673) loss_iou_unscaled: 0.2123 (0.2253) time: 1.1091 data: 0.0480 max mem: 36588
+Epoch: [0] [160/585] eta: 0:08:26 Thu Jul 25 03:49:02 2024 lr: 0.000010 loss: 1.0109 (1.0369) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6921 (0.7001) loss_iou: 0.3180 (0.3368) loss_varifocal_unscaled: 0.4614 (0.4667) loss_iou_unscaled: 0.2120 (0.2245) time: 1.1086 data: 0.0477 max mem: 36588
+Epoch: [0] [170/585] eta: 0:08:12 Thu Jul 25 03:49:14 2024 lr: 0.000010 loss: 1.0104 (1.0355) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6866 (0.6993) loss_iou: 0.3188 (0.3362) loss_varifocal_unscaled: 0.4577 (0.4662) loss_iou_unscaled: 0.2125 (0.2241) time: 1.1085 data: 0.0477 max mem: 36588
+Epoch: [0] [180/585] eta: 0:07:58 Thu Jul 25 03:49:25 2024 lr: 0.000010 loss: 1.0023 (1.0335) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6841 (0.6983) loss_iou: 0.3230 (0.3352) loss_varifocal_unscaled: 0.4561 (0.4655) loss_iou_unscaled: 0.2153 (0.2235) time: 1.1091 data: 0.0480 max mem: 36588
+Epoch: [0] [190/585] eta: 0:07:45 Thu Jul 25 03:49:36 2024 lr: 0.000010 loss: 0.9902 (1.0317) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6841 (0.6976) loss_iou: 0.3105 (0.3341) loss_varifocal_unscaled: 0.4561 (0.4651) loss_iou_unscaled: 0.2070 (0.2227) time: 1.1092 data: 0.0484 max mem: 36588
+Epoch: [0] [200/585] eta: 0:07:32 Thu Jul 25 03:49:47 2024 lr: 0.000010 loss: 1.0010 (1.0302) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6865 (0.6971) loss_iou: 0.3105 (0.3332) loss_varifocal_unscaled: 0.4577 (0.4647) loss_iou_unscaled: 0.2070 (0.2221) time: 1.1091 data: 0.0484 max mem: 36588
+Epoch: [0] [210/585] eta: 0:07:19 Thu Jul 25 03:49:58 2024 lr: 0.000010 loss: 1.0018 (1.0292) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6917 (0.6969) loss_iou: 0.3103 (0.3323) loss_varifocal_unscaled: 0.4611 (0.4646) loss_iou_unscaled: 0.2069 (0.2215) time: 1.1086 data: 0.0478 max mem: 36588
+Epoch: [0] [220/585] eta: 0:07:06 Thu Jul 25 03:50:09 2024 lr: 0.000010 loss: 0.9980 (1.0280) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6874 (0.6964) loss_iou: 0.3114 (0.3316) loss_varifocal_unscaled: 0.4582 (0.4642) loss_iou_unscaled: 0.2076 (0.2211) time: 1.1085 data: 0.0479 max mem: 36588
+Epoch: [0] [230/585] eta: 0:06:53 Thu Jul 25 03:50:20 2024 lr: 0.000010 loss: 0.9964 (1.0269) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6855 (0.6959) loss_iou: 0.3158 (0.3310) loss_varifocal_unscaled: 0.4570 (0.4639) loss_iou_unscaled: 0.2105 (0.2207) time: 1.1083 data: 0.0475 max mem: 36588
+Epoch: [0] [240/585] eta: 0:06:41 Thu Jul 25 03:50:31 2024 lr: 0.000010 loss: 0.9958 (1.0258) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6848 (0.6955) loss_iou: 0.3116 (0.3303) loss_varifocal_unscaled: 0.4565 (0.4636) loss_iou_unscaled: 0.2077 (0.2202) time: 1.1072 data: 0.0468 max mem: 36588
+Epoch: [0] [250/585] eta: 0:06:28 Thu Jul 25 03:50:42 2024 lr: 0.000010 loss: 0.9932 (1.0244) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6795 (0.6948) loss_iou: 0.3098 (0.3297) loss_varifocal_unscaled: 0.4530 (0.4632) loss_iou_unscaled: 0.2065 (0.2198) time: 1.1061 data: 0.0465 max mem: 36588
+Epoch: [0] [260/585] eta: 0:06:16 Thu Jul 25 03:50:53 2024 lr: 0.000010 loss: 0.9910 (1.0233) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.6817 (0.6944) loss_iou: 0.3080 (0.3288) loss_varifocal_unscaled: 0.4545 (0.4630) loss_iou_unscaled: 0.2054 (0.2192) time: 1.1064 data: 0.0468 max mem: 36588

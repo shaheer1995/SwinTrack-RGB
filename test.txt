@@ -1,0 +1,201 @@
+Not using distributed mode
+Hostname: cl5n036
+IP: 10.13.0.58
+Namespace(checkpoint_interval=10, conf_seed=42, config_name='Tiny', config_path='config', debug=False, device='cuda', distributed=False, do_sweep=False, enable_autograd_detect_anomaly=False, enable_profile=False, kill_other_python_processes=False, local_rank=None, local_world_size=None, logging_interval=10, master_address='127.0.0.1', method_name='SwinTrack', mixin_config=None, num_workers=16, output_dir='./output/SwinTrack-Tiny-2024.07.23-14.13.07-771346', persistent_data_workers=False, pin_memory=False, profile_logging_path=None, rank=None, resume='./output/SwinTrack-Tiny-2024.07.23-10.45.23-800156/checkpoint.pth', root_path='', run_id='SwinTrack-Tiny-2024.07.23-14.13.07-771346', seed=42, sweep_config=None, wandb_distributed_aware=False, wandb_run_offline=False, watch_model_freq=1000, watch_model_gradients=False, watch_model_parameters=False, weight_path=None, world_size=None)
+Start training
+Initialization modules flop table
+| module                                                 | #parameters or shape   | #flops    |
+|:-------------------------------------------------------|:-----------------------|:----------|
+| model                                                  | 22.712M                | 0.937G    |
+|  backbone                                              |  12.152M               |  0.937G   |
+|   backbone.stages                                      |   12.151M              |   0.937G  |
+|    backbone.stages.0                                   |    0.23M               |    0.194G |
+|    backbone.stages.1                                   |    0.966M              |    0.196G |
+|    backbone.stages.2                                   |    10.955M             |    0.547G |
+|   backbone.norm2                                       |   0.768K               |   94.08K  |
+|    backbone.norm2.weight                               |    (384,)              |           |
+|    backbone.norm2.bias                                 |    (384,)              |           |
+|  encoder                                               |  7.72M                 |           |
+|   encoder.layers                                       |   7.098M               |           |
+|    encoder.layers.0                                    |    1.774M              |           |
+|    encoder.layers.1                                    |    1.774M              |           |
+|    encoder.layers.2                                    |    1.774M              |           |
+|    encoder.layers.3                                    |    1.774M              |           |
+|   encoder.z_untied_pos_enc                             |   0.302M               |           |
+|    encoder.z_untied_pos_enc.pos                        |    5.376K              |           |
+|    encoder.z_untied_pos_enc.norm                       |    0.768K              |           |
+|    encoder.z_untied_pos_enc.pos_q_linear               |    0.148M              |           |
+|    encoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   encoder.x_untied_pos_enc                             |   0.307M               |           |
+|    encoder.x_untied_pos_enc.pos                        |    10.752K             |           |
+|    encoder.x_untied_pos_enc.norm                       |    0.768K              |           |
+|    encoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |           |
+|    encoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   encoder.rpe_bias_table                               |   13.584K              |           |
+|    encoder.rpe_bias_table.relative_position_bias_table |    (8, 1698)           |           |
+|  decoder                                               |  2.245M                |           |
+|   decoder.layers.0                                     |   1.775M               |           |
+|    decoder.layers.0.norm1_q                            |    0.768K              |           |
+|    decoder.layers.0.norm1_kv                           |    0.768K              |           |
+|    decoder.layers.0.attn                               |    0.591M              |           |
+|    decoder.layers.0.norm2                              |    0.768K              |           |
+|    decoder.layers.0.mlp                                |    1.182M              |           |
+|   decoder.z_untied_pos_enc                             |   0.154M               |           |
+|    decoder.z_untied_pos_enc.pos                        |    5.376K              |           |
+|    decoder.z_untied_pos_enc.norm                       |    0.768K              |           |
+|    decoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   decoder.x_untied_pos_enc                             |   0.307M               |           |
+|    decoder.x_untied_pos_enc.pos                        |    10.752K             |           |
+|    decoder.x_untied_pos_enc.norm                       |    0.768K              |           |
+|    decoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |           |
+|    decoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |           |
+|   decoder.rpe_bias_table                               |   9.032K               |           |
+|    decoder.rpe_bias_table.relative_position_bias_table |    (8, 1129)           |           |
+|  out_norm                                              |  0.768K                |           |
+|   out_norm.weight                                      |   (384,)               |           |
+|   out_norm.bias                                        |   (384,)               |           |
+|  head                                                  |  0.593M                |           |
+|   head.cls_mlp.layers                                  |   0.296M               |           |
+|    head.cls_mlp.layers.0                               |    0.148M              |           |
+|    head.cls_mlp.layers.1                               |    0.148M              |           |
+|    head.cls_mlp.layers.2                               |    0.385K              |           |
+|   head.reg_mlp.layers                                  |   0.297M               |           |
+|    head.reg_mlp.layers.0                               |    0.148M              |           |
+|    head.reg_mlp.layers.1                               |    0.148M              |           |
+|    head.reg_mlp.layers.2                               |    1.54K               |           |
+Tracking modules flop table
+| module                                                 | #parameters or shape   | #flops     |
+|:-------------------------------------------------------|:-----------------------|:-----------|
+| model                                                  | 22.712M                | 6.366G     |
+|  backbone                                              |  12.152M               |  3.749G    |
+|   backbone.stages                                      |   12.151M              |   3.748G   |
+|    backbone.stages.0                                   |    0.23M               |    0.775G  |
+|    backbone.stages.1                                   |    0.966M              |    0.785G  |
+|    backbone.stages.2                                   |    10.955M             |    2.188G  |
+|   backbone.norm2                                       |   0.768K               |   0.376M   |
+|    backbone.norm2.weight                               |    (384,)              |            |
+|    backbone.norm2.bias                                 |    (384,)              |            |
+|  encoder                                               |  7.72M                 |  2.018G    |
+|   encoder.layers                                       |   7.098M               |   1.922G   |
+|    encoder.layers.0                                    |    1.774M              |    0.481G  |
+|    encoder.layers.1                                    |    1.774M              |    0.481G  |
+|    encoder.layers.2                                    |    1.774M              |    0.481G  |
+|    encoder.layers.3                                    |    1.774M              |    0.481G  |
+|   encoder.z_untied_pos_enc                             |   0.302M               |   14.545M  |
+|    encoder.z_untied_pos_enc.pos                        |    5.376K              |    0       |
+|    encoder.z_untied_pos_enc.norm                       |    0.768K              |    94.08K  |
+|    encoder.z_untied_pos_enc.pos_q_linear               |    0.148M              |    7.225M  |
+|    encoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |    7.225M  |
+|   encoder.x_untied_pos_enc                             |   0.307M               |   58.179M  |
+|    encoder.x_untied_pos_enc.pos                        |    10.752K             |    0       |
+|    encoder.x_untied_pos_enc.norm                       |    0.768K              |    0.376M  |
+|    encoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |    28.901M |
+|    encoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |    28.901M |
+|   encoder.rpe_bias_table                               |   13.584K              |   0        |
+|    encoder.rpe_bias_table.relative_position_bias_table |    (8, 1698)           |            |
+|  decoder                                               |  2.245M                |  0.483G    |
+|   decoder.layers.0                                     |   1.775M               |   0.399G   |
+|    decoder.layers.0.norm1_q                            |    0.768K              |    0.376M  |
+|    decoder.layers.0.norm1_kv                           |    0.768K              |    0.47M   |
+|    decoder.layers.0.attn                               |    0.591M              |    0.167G  |
+|    decoder.layers.0.norm2                              |    0.768K              |    0.376M  |
+|    decoder.layers.0.mlp                                |    1.182M              |    0.231G  |
+|   decoder.z_untied_pos_enc                             |   0.154M               |   7.319M   |
+|    decoder.z_untied_pos_enc.pos                        |    5.376K              |    0       |
+|    decoder.z_untied_pos_enc.norm                       |    0.768K              |    94.08K  |
+|    decoder.z_untied_pos_enc.pos_k_linear               |    0.148M              |    7.225M  |
+|   decoder.x_untied_pos_enc                             |   0.307M               |   58.179M  |
+|    decoder.x_untied_pos_enc.pos                        |    10.752K             |    0       |
+|    decoder.x_untied_pos_enc.norm                       |    0.768K              |    0.376M  |
+|    decoder.x_untied_pos_enc.pos_q_linear               |    0.148M              |    28.901M |
+|    decoder.x_untied_pos_enc.pos_k_linear               |    0.148M              |    28.901M |
+|   decoder.rpe_bias_table                               |   9.032K               |   0        |
+|    decoder.rpe_bias_table.relative_position_bias_table |    (8, 1129)           |            |
+|  out_norm                                              |  0.768K                |  0.376M    |
+|   out_norm.weight                                      |   (384,)               |            |
+|   out_norm.bias                                        |   (384,)               |            |
+|  head                                                  |  0.593M                |  0.116G    |
+|   head.cls_mlp.layers                                  |   0.296M               |   57.878M  |
+|    head.cls_mlp.layers.0                               |    0.148M              |    28.901M |
+|    head.cls_mlp.layers.1                               |    0.148M              |    28.901M |
+|    head.cls_mlp.layers.2                               |    0.385K              |    75.264K |
+|   head.reg_mlp.layers                                  |   0.297M               |   58.104M  |
+|    head.reg_mlp.layers.0                               |    0.148M              |    28.901M |
+|    head.reg_mlp.layers.1                               |    0.148M              |    28.901M |
+|    head.reg_mlp.layers.2                               |    1.54K               |    0.301M  |
+Estimated model FPS: init 140.491 track 93.429
+Train SwinTrack-Tiny:   0%|          | 0/2 [00:00<?, ?it/s]
+Epoch: [0] [  0/585] eta: 0:54:01 Tue Jul 23 14:13:40 2024 lr: 0.000050 loss: 1.1454 (1.1454) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7373 (0.7373) loss_iou: 0.4081 (0.4081) loss_varifocal_unscaled: 0.4916 (0.4916) loss_iou_unscaled: 0.2720 (0.2720) time: 5.5404 data: 4.2821 max mem: 36504
+Epoch: [0] [ 10/585] eta: 0:14:30 Tue Jul 23 14:13:51 2024 lr: 0.000050 loss: 1.1495 (1.1505) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7304 (0.7323) loss_iou: 0.4157 (0.4182) loss_varifocal_unscaled: 0.4869 (0.4882) loss_iou_unscaled: 0.2771 (0.2788) time: 1.5132 data: 0.4348 max mem: 36588
+Epoch: [0] [ 20/585] eta: 0:12:26 Tue Jul 23 14:14:02 2024 lr: 0.000050 loss: 1.1348 (1.1353) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7275 (0.7293) loss_iou: 0.4011 (0.4060) loss_varifocal_unscaled: 0.4850 (0.4862) loss_iou_unscaled: 0.2674 (0.2707) time: 1.1107 data: 0.0504 max mem: 36588
+Epoch: [0] [ 30/585] eta: 0:11:34 Tue Jul 23 14:14:13 2024 lr: 0.000050 loss: 1.1102 (1.1285) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7257 (0.7282) loss_iou: 0.3887 (0.4003) loss_varifocal_unscaled: 0.4838 (0.4855) loss_iou_unscaled: 0.2591 (0.2669) time: 1.1082 data: 0.0482 max mem: 36588
+Epoch: [0] [ 40/585] eta: 0:11:03 Tue Jul 23 14:14:24 2024 lr: 0.000050 loss: 1.1069 (1.1237) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7207 (0.7268) loss_iou: 0.3850 (0.3969) loss_varifocal_unscaled: 0.4805 (0.4845) loss_iou_unscaled: 0.2567 (0.2646) time: 1.1078 data: 0.0479 max mem: 36588
+Epoch: [0] [ 50/585] eta: 0:10:39 Tue Jul 23 14:14:35 2024 lr: 0.000050 loss: 1.0980 (1.1195) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7210 (0.7259) loss_iou: 0.3822 (0.3936) loss_varifocal_unscaled: 0.4807 (0.4839) loss_iou_unscaled: 0.2548 (0.2624) time: 1.1100 data: 0.0499 max mem: 36588
+Epoch: [0] [ 60/585] eta: 0:10:20 Tue Jul 23 14:14:46 2024 lr: 0.000050 loss: 1.1054 (1.1186) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7263 (0.7260) loss_iou: 0.3811 (0.3926) loss_varifocal_unscaled: 0.4842 (0.4840) loss_iou_unscaled: 0.2541 (0.2617) time: 1.1094 data: 0.0495 max mem: 36588
+Epoch: [0] [ 70/585] eta: 0:10:03 Tue Jul 23 14:14:58 2024 lr: 0.000050 loss: 1.1101 (1.1176) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7250 (0.7260) loss_iou: 0.3842 (0.3916) loss_varifocal_unscaled: 0.4833 (0.4840) loss_iou_unscaled: 0.2562 (0.2611) time: 1.1099 data: 0.0498 max mem: 36588
+Epoch: [0] [ 80/585] eta: 0:09:48 Tue Jul 23 14:15:09 2024 lr: 0.000050 loss: 1.1086 (1.1163) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7250 (0.7261) loss_iou: 0.3827 (0.3902) loss_varifocal_unscaled: 0.4833 (0.4840) loss_iou_unscaled: 0.2551 (0.2601) time: 1.1109 data: 0.0504 max mem: 36588
+Epoch: [0] [ 90/585] eta: 0:09:33 Tue Jul 23 14:15:20 2024 lr: 0.000050 loss: 1.1062 (1.1160) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7254 (0.7261) loss_iou: 0.3822 (0.3899) loss_varifocal_unscaled: 0.4836 (0.4841) loss_iou_unscaled: 0.2548 (0.2599) time: 1.1120 data: 0.0508 max mem: 36588
+Epoch: [0] [100/585] eta: 0:09:19 Tue Jul 23 14:15:31 2024 lr: 0.000050 loss: 1.1026 (1.1144) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7249 (0.7259) loss_iou: 0.3803 (0.3885) loss_varifocal_unscaled: 0.4832 (0.4839) loss_iou_unscaled: 0.2535 (0.2590) time: 1.1122 data: 0.0509 max mem: 36588
+Epoch: [0] [110/585] eta: 0:09:06 Tue Jul 23 14:15:42 2024 lr: 0.000050 loss: 1.1025 (1.1136) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7214 (0.7255) loss_iou: 0.3802 (0.3881) loss_varifocal_unscaled: 0.4809 (0.4837) loss_iou_unscaled: 0.2535 (0.2587) time: 1.1119 data: 0.0505 max mem: 36588
+Epoch: [0] [120/585] eta: 0:08:53 Tue Jul 23 14:15:53 2024 lr: 0.000050 loss: 1.1025 (1.1131) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7198 (0.7255) loss_iou: 0.3797 (0.3876) loss_varifocal_unscaled: 0.4799 (0.4837) loss_iou_unscaled: 0.2531 (0.2584) time: 1.1119 data: 0.0506 max mem: 36588
+Epoch: [0] [130/585] eta: 0:08:40 Tue Jul 23 14:16:04 2024 lr: 0.000050 loss: 1.1031 (1.1123) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7220 (0.7253) loss_iou: 0.3784 (0.3870) loss_varifocal_unscaled: 0.4813 (0.4835) loss_iou_unscaled: 0.2523 (0.2580) time: 1.1110 data: 0.0501 max mem: 36588
+Epoch: [0] [140/585] eta: 0:08:28 Tue Jul 23 14:16:15 2024 lr: 0.000050 loss: 1.1031 (1.1114) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7221 (0.7251) loss_iou: 0.3770 (0.3863) loss_varifocal_unscaled: 0.4814 (0.4834) loss_iou_unscaled: 0.2513 (0.2575) time: 1.1106 data: 0.0496 max mem: 36588
+Epoch: [0] [150/585] eta: 0:08:15 Tue Jul 23 14:16:26 2024 lr: 0.000050 loss: 1.1029 (1.1107) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7233 (0.7250) loss_iou: 0.3769 (0.3857) loss_varifocal_unscaled: 0.4822 (0.4834) loss_iou_unscaled: 0.2513 (0.2571) time: 1.1105 data: 0.0501 max mem: 36588
+Epoch: [0] [160/585] eta: 0:08:03 Tue Jul 23 14:16:38 2024 lr: 0.000050 loss: 1.1029 (1.1099) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7223 (0.7247) loss_iou: 0.3764 (0.3852) loss_varifocal_unscaled: 0.4815 (0.4831) loss_iou_unscaled: 0.2510 (0.2568) time: 1.1103 data: 0.0500 max mem: 36588
+Epoch: [0] [170/585] eta: 0:07:51 Tue Jul 23 14:16:49 2024 lr: 0.000050 loss: 1.0903 (1.1090) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7192 (0.7247) loss_iou: 0.3711 (0.3843) loss_varifocal_unscaled: 0.4794 (0.4831) loss_iou_unscaled: 0.2474 (0.2562) time: 1.1108 data: 0.0496 max mem: 36588
+Epoch: [0] [180/585] eta: 0:07:39 Tue Jul 23 14:17:00 2024 lr: 0.000050 loss: 1.0932 (1.1082) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7207 (0.7245) loss_iou: 0.3711 (0.3837) loss_varifocal_unscaled: 0.4804 (0.4830) loss_iou_unscaled: 0.2474 (0.2558) time: 1.1114 data: 0.0500 max mem: 36588
+Epoch: [0] [190/585] eta: 0:07:27 Tue Jul 23 14:17:11 2024 lr: 0.000050 loss: 1.0978 (1.1075) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7191 (0.7243) loss_iou: 0.3721 (0.3832) loss_varifocal_unscaled: 0.4794 (0.4829) loss_iou_unscaled: 0.2481 (0.2555) time: 1.1113 data: 0.0500 max mem: 36588
+Epoch: [0] [200/585] eta: 0:07:16 Tue Jul 23 14:17:22 2024 lr: 0.000050 loss: 1.1006 (1.1071) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7191 (0.7242) loss_iou: 0.3723 (0.3829) loss_varifocal_unscaled: 0.4794 (0.4828) loss_iou_unscaled: 0.2482 (0.2553) time: 1.1122 data: 0.0502 max mem: 36588
+Epoch: [0] [210/585] eta: 0:07:04 Tue Jul 23 14:17:33 2024 lr: 0.000050 loss: 1.0990 (1.1067) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7199 (0.7240) loss_iou: 0.3769 (0.3826) loss_varifocal_unscaled: 0.4799 (0.4827) loss_iou_unscaled: 0.2513 (0.2551) time: 1.1141 data: 0.0509 max mem: 36588
+Epoch: [0] [220/585] eta: 0:06:52 Tue Jul 23 14:17:44 2024 lr: 0.000050 loss: 1.0939 (1.1060) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7194 (0.7238) loss_iou: 0.3775 (0.3821) loss_varifocal_unscaled: 0.4796 (0.4826) loss_iou_unscaled: 0.2517 (0.2548) time: 1.1137 data: 0.0508 max mem: 36588
+Epoch: [0] [230/585] eta: 0:06:41 Tue Jul 23 14:17:55 2024 lr: 0.000050 loss: 1.0889 (1.1052) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7188 (0.7237) loss_iou: 0.3684 (0.3815) loss_varifocal_unscaled: 0.4792 (0.4825) loss_iou_unscaled: 0.2456 (0.2544) time: 1.1126 data: 0.0504 max mem: 36588
+Epoch: [0] [240/585] eta: 0:06:29 Tue Jul 23 14:18:07 2024 lr: 0.000050 loss: 1.0889 (1.1045) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7193 (0.7237) loss_iou: 0.3643 (0.3809) loss_varifocal_unscaled: 0.4795 (0.4825) loss_iou_unscaled: 0.2429 (0.2539) time: 1.1125 data: 0.0503 max mem: 36588
+Epoch: [0] [250/585] eta: 0:06:18 Tue Jul 23 14:18:18 2024 lr: 0.000050 loss: 1.0888 (1.1037) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7200 (0.7234) loss_iou: 0.3668 (0.3803) loss_varifocal_unscaled: 0.4800 (0.4823) loss_iou_unscaled: 0.2445 (0.2535) time: 1.1130 data: 0.0508 max mem: 36588
+Epoch: [0] [260/585] eta: 0:06:06 Tue Jul 23 14:18:29 2024 lr: 0.000050 loss: 1.0846 (1.1032) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7178 (0.7233) loss_iou: 0.3668 (0.3799) loss_varifocal_unscaled: 0.4786 (0.4822) loss_iou_unscaled: 0.2445 (0.2533) time: 1.1138 data: 0.0510 max mem: 36588
+Epoch: [0] [270/585] eta: 0:05:55 Tue Jul 23 14:18:40 2024 lr: 0.000050 loss: 1.0901 (1.1026) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7205 (0.7232) loss_iou: 0.3667 (0.3794) loss_varifocal_unscaled: 0.4804 (0.4821) loss_iou_unscaled: 0.2444 (0.2530) time: 1.1131 data: 0.0505 max mem: 36588
+Epoch: [0] [280/585] eta: 0:05:43 Tue Jul 23 14:18:51 2024 lr: 0.000050 loss: 1.0874 (1.1021) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7177 (0.7230) loss_iou: 0.3690 (0.3790) loss_varifocal_unscaled: 0.4785 (0.4820) loss_iou_unscaled: 0.2460 (0.2527) time: 1.1125 data: 0.0501 max mem: 36588
+Epoch: [0] [290/585] eta: 0:05:32 Tue Jul 23 14:19:02 2024 lr: 0.000050 loss: 1.0778 (1.1011) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7177 (0.7229) loss_iou: 0.3660 (0.3782) loss_varifocal_unscaled: 0.4785 (0.4819) loss_iou_unscaled: 0.2440 (0.2521) time: 1.1129 data: 0.0501 max mem: 36588
+Epoch: [0] [300/585] eta: 0:05:20 Tue Jul 23 14:19:13 2024 lr: 0.000050 loss: 1.0778 (1.1005) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7187 (0.7227) loss_iou: 0.3575 (0.3778) loss_varifocal_unscaled: 0.4791 (0.4818) loss_iou_unscaled: 0.2384 (0.2518) time: 1.1139 data: 0.0500 max mem: 36588
+Epoch: [0] [310/585] eta: 0:05:09 Tue Jul 23 14:19:25 2024 lr: 0.000050 loss: 1.0879 (1.0999) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7200 (0.7226) loss_iou: 0.3670 (0.3773) loss_varifocal_unscaled: 0.4800 (0.4817) loss_iou_unscaled: 0.2447 (0.2516) time: 1.1141 data: 0.0502 max mem: 36588
+Epoch: [0] [320/585] eta: 0:04:58 Tue Jul 23 14:19:36 2024 lr: 0.000050 loss: 1.0786 (1.0994) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7182 (0.7225) loss_iou: 0.3666 (0.3769) loss_varifocal_unscaled: 0.4788 (0.4816) loss_iou_unscaled: 0.2444 (0.2513) time: 1.1144 data: 0.0508 max mem: 36588
+Epoch: [0] [330/585] eta: 0:04:46 Tue Jul 23 14:19:47 2024 lr: 0.000050 loss: 1.0798 (1.0988) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7164 (0.7223) loss_iou: 0.3621 (0.3765) loss_varifocal_unscaled: 0.4776 (0.4815) loss_iou_unscaled: 0.2414 (0.2510) time: 1.1138 data: 0.0507 max mem: 36588
+Epoch: [0] [340/585] eta: 0:04:35 Tue Jul 23 14:19:58 2024 lr: 0.000050 loss: 1.0765 (1.0981) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7163 (0.7220) loss_iou: 0.3621 (0.3761) loss_varifocal_unscaled: 0.4776 (0.4814) loss_iou_unscaled: 0.2414 (0.2507) time: 1.1125 data: 0.0499 max mem: 36588
+Epoch: [0] [350/585] eta: 0:04:24 Tue Jul 23 14:20:09 2024 lr: 0.000050 loss: 1.0702 (1.0974) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7137 (0.7218) loss_iou: 0.3585 (0.3756) loss_varifocal_unscaled: 0.4758 (0.4812) loss_iou_unscaled: 0.2390 (0.2504) time: 1.1128 data: 0.0500 max mem: 36588
+Epoch: [0] [360/585] eta: 0:04:12 Tue Jul 23 14:20:20 2024 lr: 0.000050 loss: 1.0724 (1.0968) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7137 (0.7217) loss_iou: 0.3577 (0.3751) loss_varifocal_unscaled: 0.4758 (0.4811) loss_iou_unscaled: 0.2385 (0.2501) time: 1.1125 data: 0.0499 max mem: 36588
+Epoch: [0] [370/585] eta: 0:04:01 Tue Jul 23 14:20:31 2024 lr: 0.000050 loss: 1.0784 (1.0963) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7182 (0.7215) loss_iou: 0.3607 (0.3748) loss_varifocal_unscaled: 0.4788 (0.4810) loss_iou_unscaled: 0.2405 (0.2498) time: 1.1133 data: 0.0501 max mem: 36588
+Epoch: [0] [380/585] eta: 0:03:50 Tue Jul 23 14:20:42 2024 lr: 0.000050 loss: 1.0739 (1.0958) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7157 (0.7214) loss_iou: 0.3607 (0.3744) loss_varifocal_unscaled: 0.4771 (0.4809) loss_iou_unscaled: 0.2405 (0.2496) time: 1.1138 data: 0.0506 max mem: 36588
+Epoch: [0] [390/585] eta: 0:03:39 Tue Jul 23 14:20:54 2024 lr: 0.000050 loss: 1.0747 (1.0956) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7203 (0.7215) loss_iou: 0.3615 (0.3741) loss_varifocal_unscaled: 0.4802 (0.4810) loss_iou_unscaled: 0.2410 (0.2494) time: 1.1128 data: 0.0501 max mem: 36588
+Epoch: [0] [400/585] eta: 0:03:27 Tue Jul 23 14:21:05 2024 lr: 0.000050 loss: 1.0810 (1.0953) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7234 (0.7215) loss_iou: 0.3632 (0.3738) loss_varifocal_unscaled: 0.4822 (0.4810) loss_iou_unscaled: 0.2421 (0.2492) time: 1.1140 data: 0.0507 max mem: 36588
+Epoch: [0] [410/585] eta: 0:03:16 Tue Jul 23 14:21:16 2024 lr: 0.000050 loss: 1.0740 (1.0948) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7172 (0.7213) loss_iou: 0.3602 (0.3735) loss_varifocal_unscaled: 0.4782 (0.4809) loss_iou_unscaled: 0.2402 (0.2490) time: 1.1146 data: 0.0510 max mem: 36588
+Epoch: [0] [420/585] eta: 0:03:05 Tue Jul 23 14:21:27 2024 lr: 0.000050 loss: 1.0724 (1.0943) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7172 (0.7212) loss_iou: 0.3572 (0.3731) loss_varifocal_unscaled: 0.4782 (0.4808) loss_iou_unscaled: 0.2382 (0.2487) time: 1.1139 data: 0.0504 max mem: 36588
+Epoch: [0] [430/585] eta: 0:02:53 Tue Jul 23 14:21:38 2024 lr: 0.000050 loss: 1.0752 (1.0939) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7166 (0.7212) loss_iou: 0.3571 (0.3727) loss_varifocal_unscaled: 0.4778 (0.4808) loss_iou_unscaled: 0.2381 (0.2485) time: 1.1146 data: 0.0508 max mem: 36588
+Epoch: [0] [440/585] eta: 0:02:42 Tue Jul 23 14:21:49 2024 lr: 0.000050 loss: 1.0789 (1.0937) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7164 (0.7211) loss_iou: 0.3596 (0.3725) loss_varifocal_unscaled: 0.4776 (0.4808) loss_iou_unscaled: 0.2397 (0.2484) time: 1.1149 data: 0.0510 max mem: 36588
+Epoch: [0] [450/585] eta: 0:02:31 Tue Jul 23 14:22:00 2024 lr: 0.000050 loss: 1.0792 (1.0934) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7174 (0.7210) loss_iou: 0.3646 (0.3724) loss_varifocal_unscaled: 0.4783 (0.4807) loss_iou_unscaled: 0.2431 (0.2483) time: 1.1144 data: 0.0506 max mem: 36588
+Epoch: [0] [460/585] eta: 0:02:20 Tue Jul 23 14:22:12 2024 lr: 0.000050 loss: 1.0790 (1.0930) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7165 (0.7209) loss_iou: 0.3573 (0.3721) loss_varifocal_unscaled: 0.4777 (0.4806) loss_iou_unscaled: 0.2382 (0.2481) time: 1.1142 data: 0.0507 max mem: 36588
+Epoch: [0] [470/585] eta: 0:02:09 Tue Jul 23 14:22:23 2024 lr: 0.000050 loss: 1.0734 (1.0926) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7169 (0.7209) loss_iou: 0.3547 (0.3716) loss_varifocal_unscaled: 0.4779 (0.4806) loss_iou_unscaled: 0.2365 (0.2478) time: 1.1141 data: 0.0507 max mem: 36588
+Epoch: [0] [480/585] eta: 0:01:57 Tue Jul 23 14:22:34 2024 lr: 0.000050 loss: 1.0720 (1.0920) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7148 (0.7208) loss_iou: 0.3526 (0.3713) loss_varifocal_unscaled: 0.4766 (0.4805) loss_iou_unscaled: 0.2351 (0.2475) time: 1.1131 data: 0.0501 max mem: 36588
+Epoch: [0] [490/585] eta: 0:01:46 Tue Jul 23 14:22:45 2024 lr: 0.000050 loss: 1.0711 (1.0917) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7125 (0.7206) loss_iou: 0.3541 (0.3710) loss_varifocal_unscaled: 0.4750 (0.4804) loss_iou_unscaled: 0.2361 (0.2474) time: 1.1131 data: 0.0507 max mem: 36588
+Epoch: [0] [500/585] eta: 0:01:35 Tue Jul 23 14:22:56 2024 lr: 0.000050 loss: 1.0705 (1.0913) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7125 (0.7205) loss_iou: 0.3541 (0.3708) loss_varifocal_unscaled: 0.4750 (0.4803) loss_iou_unscaled: 0.2361 (0.2472) time: 1.1139 data: 0.0506 max mem: 36588
+Epoch: [0] [510/585] eta: 0:01:24 Tue Jul 23 14:23:07 2024 lr: 0.000050 loss: 1.0705 (1.0910) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7135 (0.7204) loss_iou: 0.3574 (0.3706) loss_varifocal_unscaled: 0.4757 (0.4803) loss_iou_unscaled: 0.2383 (0.2470) time: 1.1134 data: 0.0501 max mem: 36588
+Epoch: [0] [520/585] eta: 0:01:12 Tue Jul 23 14:23:18 2024 lr: 0.000050 loss: 1.0720 (1.0905) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7178 (0.7203) loss_iou: 0.3573 (0.3702) loss_varifocal_unscaled: 0.4785 (0.4802) loss_iou_unscaled: 0.2382 (0.2468) time: 1.1125 data: 0.0500 max mem: 36588
+Epoch: [0] [530/585] eta: 0:01:01 Tue Jul 23 14:23:30 2024 lr: 0.000050 loss: 1.0741 (1.0902) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7163 (0.7202) loss_iou: 0.3573 (0.3700) loss_varifocal_unscaled: 0.4776 (0.4802) loss_iou_unscaled: 0.2382 (0.2467) time: 1.1120 data: 0.0494 max mem: 36588
+Epoch: [0] [540/585] eta: 0:00:50 Tue Jul 23 14:23:41 2024 lr: 0.000050 loss: 1.0686 (1.0898) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7156 (0.7201) loss_iou: 0.3550 (0.3696) loss_varifocal_unscaled: 0.4771 (0.4801) loss_iou_unscaled: 0.2367 (0.2464) time: 1.1131 data: 0.0498 max mem: 36588
+Epoch: [0] [550/585] eta: 0:00:39 Tue Jul 23 14:23:52 2024 lr: 0.000050 loss: 1.0666 (1.0894) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7159 (0.7201) loss_iou: 0.3535 (0.3693) loss_varifocal_unscaled: 0.4773 (0.4801) loss_iou_unscaled: 0.2357 (0.2462) time: 1.1136 data: 0.0502 max mem: 36588
+Epoch: [0] [560/585] eta: 0:00:28 Tue Jul 23 14:24:03 2024 lr: 0.000050 loss: 1.0657 (1.0889) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7118 (0.7199) loss_iou: 0.3470 (0.3690) loss_varifocal_unscaled: 0.4745 (0.4799) loss_iou_unscaled: 0.2313 (0.2460) time: 1.1120 data: 0.0497 max mem: 36588
+Epoch: [0] [570/585] eta: 0:00:16 Tue Jul 23 14:24:14 2024 lr: 0.000050 loss: 1.0615 (1.0885) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7114 (0.7198) loss_iou: 0.3468 (0.3687) loss_varifocal_unscaled: 0.4742 (0.4798) loss_iou_unscaled: 0.2312 (0.2458) time: 1.1107 data: 0.0490 max mem: 36588
+Epoch: [0] [580/585] eta: 0:00:05 Tue Jul 23 14:24:25 2024 lr: 0.000050 loss: 1.0678 (1.0882) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7124 (0.7197) loss_iou: 0.3532 (0.3685) loss_varifocal_unscaled: 0.4749 (0.4798) loss_iou_unscaled: 0.2354 (0.2457) time: 1.1104 data: 0.0491 max mem: 36588
+Epoch: [0] [584/585] eta: 0:00:01 Tue Jul 23 14:24:30 2024 lr: 0.000050 loss: 1.0699 (1.0880) pos_samples_ratio: 1.0000 (1.0000) loss_varifocal: 0.7124 (0.7196) loss_iou: 0.3550 (0.3684) loss_varifocal_unscaled: 0.4749 (0.4797) loss_iou_unscaled: 0.2367 (0.2456) time: 1.1104 data: 0.0491 max mem: 36588
+Epoch: [0] Total time: 0:10:55 (1.1203 s / it)
+Epoch 0 branch train statistics:
+----------------------------
+data/train/random_without_replacement_sampling_orchestrator:
+got-10k-got10k_vot_train_split-train-22532d94490def759c957331d1ac59b9(40): 6552 times + 0
+
+----------------------------
+Val [ 0/18] eta: 0:01:11 Tue Jul 23 14:24:34 2024 val_loss: 1.3431 (1.3431) val_pos_samples_ratio: 1.0000 (1.0000) val_loss_varifocal: 0.6375 (0.6375) val_loss_iou: 0.7056 (0.7056) val_loss_varifocal_unscaled: 0.4250 (0.4250) val_loss_iou_unscaled: 0.4704 (0.4704) time: 3.9878 data: 3.5985 max mem: 36588
+Val [10/18] eta: 0:00:05 Tue Jul 23 14:24:38 2024 val_loss: 1.3710 (1.3689) val_pos_samples_ratio: 1.0000 (1.0000) val_loss_varifocal: 0.6373 (0.6337) val_loss_iou: 0.7341 (0.7352) val_loss_varifocal_unscaled: 0.4248 (0.4225) val_loss_iou_unscaled: 0.4894 (0.4901) time: 0.7104 data: 0.3703 max mem: 36588
+Val [17/18] eta: 0:00:00 Tue Jul 23 14:24:40 2024 val_loss: 1.3710 (1.3696) val_pos_samples_ratio: 1.0000 (1.0000) val_loss_varifocal: 0.6373 (0.6337) val_loss_iou: 0.7357 (0.7359) val_loss_varifocal_unscaled: 0.4248 (0.4225) val_loss_iou_unscaled: 0.4905 (0.4906) time: 0.5819 data: 0.2439 max mem: 36588
+Val Total time: 0:00:10 (0.5877 s / it)
+Averaged stats: val_loss: 1.3710 (1.3696) val_pos_samples_ratio: 1.0000 (1.0000) val_loss_varifocal: 0.6373 (0.6337) val_loss_iou: 0.7357 (0.7359) val_loss_varifocal_unscaled: 0.4248 (0.4225) val_loss_iou_unscaled: 0.4905 (0.4906)
+Train SwinTrack-Tiny:  50%|█████     | 1/2 [11:07<11:07, 667.93s/it]
+Train SwinTrack-Tiny:  50%|█████     | 1/2 [11:12<11:12, 672.68s/it]
