@@ -175,8 +175,8 @@ runner:
 
     optimizer:
       type: "AdamW"
-      lr: 1.e-5
-      weight_decay: 1.e-4
+      lr: 1.e-4
+      weight_decay: 5.e-2
       per_parameter:
         - name_regex: "^backbone.stages"
           lr_mult: 0.1
@@ -184,12 +184,12 @@ runner:
       lr_scheduler:
         type: "MultiStepLR"
         values: [ 1, 0.1 ]
-        milestones: [ 0.7, 1 ]
+        milestones: [ 0.6, 1 ]
         per_iteration: true
 
         warmup:
           initial_factor: 0.001
-          length: 0.01
+          length: 0.1
           method: "linear" # linear or constant
 
     loss:

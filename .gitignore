@@ -539,7 +539,7 @@ wandb
 path.yaml
 
 wandb/
-.*txt
+*txt
 results/
 pretrained/
 output/

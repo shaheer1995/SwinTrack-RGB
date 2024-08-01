@@ -127,8 +127,18 @@ class RunnerDriver:
             description = f'Evaluate {self.name}'
         with enable_logger(self.default_logger), self.event_dispatcher, self.profiler:
             for epoch in tqdm(range(self.epoch, self.n_epochs), desc=description, file=sys.stdout):
-                print()
+                
                 self.epoch = epoch
+                
+                if self.epoch == 7:
+                    print("Freezing Backbone Weights from epoch : ", self.epoch)
+                    for name, param in get_model(self.model).named_parameters():
+                        if name.startswith('backbone'):
+                            param.requires_grad = False
+                    # Verify that the parameters are frozen
+                    for name, param in get_model(self.model).named_parameters():
+                        if name.startswith('backbone'):
+                            print(f"{name} is frozen: {not param.requires_grad}")
 
                 epoch_has_training_run = False
                 for branch_name, (data_loader, runner, logger, is_training, epoch_interval, run_in_last_epoch, event_dispatcher) in self.runs.items():

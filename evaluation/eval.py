@@ -132,7 +132,7 @@ if __name__ == '__main__':
     import os
  
     rootDir = '/home/n11005009/internship/datasets/hyper-obj-det/HOT2020/test'
-    resultsDir = '/home/n11005009/internship/work/SwinTrack-RGB/output/SwinTrack-Tiny-2024.07.24-01.39.21-061134/test_metrics/got10k/submit/got-10k-test-ecc567844dc16ecafe1f151e1c021bda/Tiny/'
+    resultsDir = '/home/n11005009/internship/work/SwinTrack-RGB/output/SwinTrack-Tiny-2024.07.31-10.40.12-162865/test_metrics/got10k/submit/got-10k-test-ecc567844dc16ecafe1f151e1c021bda/Tiny/'
     print("ROOT DIR : ", rootDir)
     print("Rsults DIR : ", resultsDir)
 

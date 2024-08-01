@@ -198,10 +198,40 @@ def _build_model(config, runtime_vars, building_context: BuildingContext):
             break
 
     model, pseudo_data_generator = build_model(config, runtime_vars, batch_size, num_epochs, iterations_per_epoch, building_context.model_event_register, has_training_run)
-    
+    print("Model : ", model)
+
+    model_state_dict = model.state_dict()
+    for key in model_state_dict.keys():
+        print(key)
+    # Calculate the number of parameters
+    # Freeze parameters starting with "backbone"
+    # for name, param in model.named_parameters():
+    #     if name.startswith('backbone'):
+    #         param.requires_grad = False
+
+    # # Verify that the parameters are frozen
+    # for name, param in model.named_parameters():
+    #     if name.startswith('backbone'):
+    #         print(f"{name} is frozen: {not param.requires_grad}")
+
+    num_params = sum(p.numel() for p in model.parameters())
+    print(f'Total number of parameters: {num_params}')
     weight_path = runtime_vars.weight_path
     if weight_path is not None:
-        model.load_state_dict(torch.load(weight_path, map_location='cpu')['model'])
+        # model.load_state_dict(torch.load(weight_path, map_location='cpu')['model'])
+        checkpoint = torch.load(weight_path, map_location='cpu')
+
+        # Print the keys in the checkpoint
+        print("Checkpoint keys:")
+        for key in checkpoint.keys():
+            print(key)
+
+        # Print the keys in the model's state_dict
+        print("\nModel state_dict keys before loading checkpoint:")
+        for key in model.state_dict().keys():
+            print(key)
+
+        model.load_state_dict(checkpoint['model'])
 
     device = torch.device(runtime_vars.device)
     model.to(device)
