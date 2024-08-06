@@ -1,6 +1,6 @@
 version: 4
 
-num_epochs: 2
+num_epochs: 40
 
 branch:
   train:
@@ -77,7 +77,7 @@ branch:
 
 data:
   train:
-    batch_size: 64
+    batch_size: 114
 
     type: "SiamFC"
 
@@ -115,7 +115,7 @@ data:
         color_jitter: 0.4
 
   val:
-    batch_size: 64
+    batch_size: 114
 
     type: "SiamFC"
 
@@ -176,20 +176,20 @@ runner:
     optimizer:
       type: "AdamW"
       lr: 1.e-5
-      weight_decay: 1.e-4
-      per_parameter:
-        - name_regex: "^backbone.stages"
-          lr_mult: 0.1
+      weight_decay: 5.e-2
+      # per_parameter:
+      #   - name_regex: "^backbone.stages"
+      #     lr_mult: 0.1
       clip_max_norm: 0.1
       lr_scheduler:
         type: "MultiStepLR"
         values: [ 1, 0.1 ]
-        milestones: [ 0.7, 1 ]
+        milestones: [ 0.8, 1 ]
         per_iteration: true
 
         warmup:
           initial_factor: 0.001
-          length: 0.01
+          length: 0.15
           method: "linear" # linear or constant
 
     loss:

@@ -177,14 +177,14 @@ runner:
       type: "AdamW"
       lr: 1.e-4
       weight_decay: 5.e-2
-      per_parameter:
-        - name_regex: "^backbone.stages"
-          lr_mult: 0.1
+      # per_parameter:
+      #   - name_regex: "^backbone.stages"
+      #     lr_mult: 0.01
       clip_max_norm: 0.1
       lr_scheduler:
         type: "MultiStepLR"
         values: [ 1, 0.1 ]
-        milestones: [ 0.6, 1 ]
+        milestones: [ 0.7, 1 ]
         per_iteration: true
 
         warmup:

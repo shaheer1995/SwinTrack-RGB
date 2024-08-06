@@ -126,13 +126,14 @@ def compile_results(gt, bboxes):
     success=success_overlap(gt4, bboxes, l)
     # integrate over the thresholds
     auc = np.mean(success)
+
     return precision,success,average_center_location_error, auc,dp_20
 
 if __name__ == '__main__':
     import os
  
-    rootDir = '/home/n11005009/internship/datasets/hyper-obj-det/HOT2020/test'
-    resultsDir = '/home/n11005009/internship/work/SwinTrack-RGB/output/SwinTrack-Tiny-2024.07.31-10.40.12-162865/test_metrics/got10k/submit/got-10k-test-ecc567844dc16ecafe1f151e1c021bda/Tiny/'
+    rootDir = '/home/shaheer/dataset/HOT2020/test'
+    resultsDir = '/home/shaheer/internship/work/SwinTrack-RGB/output/SwinTrack-Tiny-2024.08.06-22.02.17-877247/test_metrics/got10k/submit/got-10k-test-ecc567844dc16ecafe1f151e1c021bda/Tiny/'
     print("ROOT DIR : ", rootDir)
     print("Rsults DIR : ", resultsDir)
 
@@ -182,3 +183,4 @@ if __name__ == '__main__':
     # res = res.dropna(axis=1, how='all').to_numpy()
     # dp, op, cle, auc, dp_20 = compile_results(gt, res)
 
+    

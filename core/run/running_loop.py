@@ -117,7 +117,7 @@ class RunnerDriver:
             _wandb_watch_model(get_model(self.model), self.wandb_instance, self.runtime_vars.watch_model_parameters,
                                self.runtime_vars.watch_model_gradients, self.runtime_vars.watch_model_freq)
 
-        print_model_efficiency_assessment(self.efficiency_assessor, get_model(self.model), self.wandb_instance)
+        # print_model_efficiency_assessment(self.efficiency_assessor, get_model(self.model), self.wandb_instance)
 
         start_time = time.perf_counter()
 
@@ -130,15 +130,15 @@ class RunnerDriver:
                 
                 self.epoch = epoch
                 
-                if self.epoch == 7:
-                    print("Freezing Backbone Weights from epoch : ", self.epoch)
-                    for name, param in get_model(self.model).named_parameters():
-                        if name.startswith('backbone'):
-                            param.requires_grad = False
-                    # Verify that the parameters are frozen
-                    for name, param in get_model(self.model).named_parameters():
-                        if name.startswith('backbone'):
-                            print(f"{name} is frozen: {not param.requires_grad}")
+                # if self.epoch == 2:
+                #     print("Freezing Backbone Weights from epoch : ", self.epoch)
+                #     for name, param in get_model(self.model).named_parameters():
+                #         if name.startswith('backbone'):
+                #             param.requires_grad = False
+                #     # Verify that the parameters are frozen
+                #     for name, param in get_model(self.model).named_parameters():
+                #         if name.startswith('backbone'):
+                #             print(f"{name} is frozen: {not param.requires_grad}")
 
                 epoch_has_training_run = False
                 for branch_name, (data_loader, runner, logger, is_training, epoch_interval, run_in_last_epoch, event_dispatcher) in self.runs.items():

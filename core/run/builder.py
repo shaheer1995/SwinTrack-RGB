@@ -218,20 +218,66 @@ def _build_model(config, runtime_vars, building_context: BuildingContext):
     print(f'Total number of parameters: {num_params}')
     weight_path = runtime_vars.weight_path
     if weight_path is not None:
-        # model.load_state_dict(torch.load(weight_path, map_location='cpu')['model'])
+       
         checkpoint = torch.load(weight_path, map_location='cpu')
+        # Filter the state dictionary to only include keys containing "backbone"
+        filtered_state_dict = {k: v for k, v in checkpoint['model'].items() if 'backbone' in k}
+        # Load the filtered state dictionary into your model
+        model.load_state_dict(filtered_state_dict, strict=False) 
 
-        # Print the keys in the checkpoint
-        print("Checkpoint keys:")
-        for key in checkpoint.keys():
-            print(key)
+        # model.load_state_dict(checkpoint['model'])
 
-        # Print the keys in the model's state_dict
-        print("\nModel state_dict keys before loading checkpoint:")
-        for key in model.state_dict().keys():
-            print(key)
 
-        model.load_state_dict(checkpoint['model'])
+        # # model.load_state_dict(torch.load(weight_path, map_location='cpu')['model'])
+        # path_1 = '/home/shaheer/internship/work/SwinTrack-RGB/pretrained/SwinTrack-Base.pth'
+        # checkpoint1 = torch.load(path_1, map_location='cpu')
+
+        # # Print the keys in the checkpoint
+        # print("Checkpoint keys:")
+        # for key in checkpoint1['model'].keys():
+        #     print(key)
+
+        # # Print the keys in the model's state_dict
+        # print("\nModel state_dict keys before loading checkpoint:")
+        # for key, value in model.state_dict().items():
+        #     print(key, value.shape)
+
+        # model.load_state_dict(checkpoint1['model'])
+        
+        # checkpoint = torch.load(weight_path)
+        # corrected_state_dict = {}
+        # for key, value in checkpoint['model'].items():
+        #     new_key = key
+        #     print(key, value.shape)
+        #     if "attn_mask" in key:
+        #         print(f"Removing key with 'attn_mask': {key}")
+        #         continue
+        #     if "layers.0.downsample" in key:
+        #         new_key = key.replace("layers.0.downsample", "backbone.stages.1.pre_stage")
+        #     if "layers.0.downsample" in key:
+        #         new_key = key.replace("layers.1.downsample", "backbone.stages.2.pre_stage")
+        #     if "layers.2.downsample" in key:
+        #         print("Removing : ", key)
+        #         continue
+        #     if key.startswith('layers'):
+        #         new_key = new_key.replace('layers', 'backbone.stages')
+        #     elif key.startswith('patch_embed'):
+        #         new_key = new_key.replace('patch_embed', 'backbone.stages.0.pre_stage')
+            
+        #     corrected_state_dict[new_key] = value
+
+        # for key, value in corrected_state_dict.items():
+        #     print(key, value.shape)
+
+        # # Load the corrected state dict into the model
+        # model.load_state_dict(corrected_state_dict, strict=False)
+        
+    # Freeze parameters starting with "backbone"
+    
+    # for name, param in model.named_parameters():
+    #     if name.startswith('backbone'):
+    #         param.requires_grad = False
+
 
     device = torch.device(runtime_vars.device)
     model.to(device)

@@ -69,7 +69,7 @@ def construct_GOT10k(constructor: SingleObjectTrackingDatasetConstructor, seed):
     for sequence_name in os.listdir(os.path.join(root_path, folder)):
         sequence_name = sequence_name.strip()
         current_sequence_path = os.path.join(root_path, folder, sequence_name) + '/HSI-FalseColor'
-        # print("path : ", current_sequence_path)
+        print("path : ", current_sequence_path)
         sequence_list.append((sequence_name, current_sequence_path))
 
     constructor.set_total_number_of_sequences(len(sequence_list))

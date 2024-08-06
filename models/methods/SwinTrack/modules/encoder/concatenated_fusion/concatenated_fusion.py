@@ -26,6 +26,7 @@ class ConcatenatedFusion(nn.Module):
                     (B, L_z, C): template image feature tokens
                     (B, L_x, C): search image feature tokens
         '''
+        # print("Concat Feature Fusion : ", z.shape, x.shape)
         concatenated = torch.cat((z, x), dim=1)
 
         attn_pos_enc = None
